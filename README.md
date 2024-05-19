@@ -1,7 +1,7 @@
 # Break Reminder Script
 
 This Python script is designed to help users maintain healthy work habits by reminding them to take regular breaks while working on the computer. It prompts users to take short breaks after a certain duration of work, helping to reduce eye strain, fatigue, and improve productivity.
-
+DOI: in windows this code loock like a virus.(Because it touched itself and removed code from the script, the defender thought it was ransomware. All of this happened because I was lazy to create an installation file.lol)
 ## Features
 
 - **Interval Breaks:** After every two intervals of work (each interval configurable), the script prompts the user to take a short break.
@@ -15,10 +15,11 @@ This Python script is designed to help users maintain healthy work habits by rem
 To use the script, follow these steps:
 
 1. **Clone the Repository:**
+   ```
    git clone https://github.com/on404/remainder.git 
 2. **Navigate to the Directory:**
+   ```
    cd remainder
-
 3. **Run the Script:**
 - For Windows:
   ```
