@@ -1,6 +1,10 @@
 # Break Reminder Script
 
 This Python script is designed to help users maintain healthy work habits by reminding them to take regular breaks while working on the computer. It prompts users to take short breaks after a certain duration of work, helping to reduce eye strain, fatigue, and improve productivity.
+Got it, here's the revised sentence:
+
+Please note that the folder also contains an AI version of the code, which does not include the installation process.
+
 DOI: in windows this code loock like a virus.(Because it touched itself and removed code from the script, the defender thought it was ransomware. All of this happened because I was lazy to create an installation file.lol)
 ## Features
 
