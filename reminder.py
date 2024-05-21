@@ -23,7 +23,6 @@ def create_label(parent, text):
 
 def close_window(window):
     window.destroy()
-    return 0
 
 def call_sbox(window):
     window.destroy()
