@@ -1,69 +1,43 @@
-"""***####by defolt whiuot user was tuch, up withe th os
-******###after a 2 break of 5m you can take a 15 m break
-****** def install
-####back to work*****"""
-#!/usr/bin/python3
-import os
-if os.name == 'nt':
-    os.system('cls')
-#    src = 'reminder.exe'
-#    dest = 'C:/ProgramData/Microsoft/Windows/Start Menu/Programs/StartUp/reminder.exe'
-    os.rename('reminder.exe', 'C:/ProgramData/Microsoft/Windows/Start Menu/Programs/StartUp/reminder.exe')
-else:
-    loction = os.getcwd()
-    os.system('clear')
-    os.system(f"sed  -i '1i {loction}/reminder.py &'  ~/.bashrc")
-#    os.system(f"sed -i '19,20d' {loction}/reminder.py")
-    try:
-        import tkinter
-    except ImportError as e:
-        print('We install a library so the script can run easily ....\nWe need from you to input your password that we can install the missing without problem')
-        def install_function():
-            os.system("sudo bash -c 'sudo apt-get update && sudo apt install python3-tk -y >/dev/null 2>&1 & disown'")
-        install_function()
 from tkinter import *
 import time
+
+#window size 
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 300
+
+def create_window(parent=None):
+    window = Toplevel(parent) if parent else Tk()
+    window.title("Break Time")
+    screen_width = window.winfo_screenwidth()
+    screen_height = window.winfo_screenheight()
+    x_coordinate = (screen_width - WINDOW_WIDTH) // 2
+    y_coordinate = (screen_height - WINDOW_HEIGHT) // 2
+    window.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}+{x_coordinate}+{y_coordinate}")
+    return window
+
+def create_label(parent, text):
+    can_wiget = Canvas(parent)
+    can_wiget = can_wiget.pack()
+    label = Label(parent, text=text, font='verdana 25 bold', bd=6, fg='red').place(relx=0.5, rely=0.5, anchor=CENTER)
+    return label
+
+def close_window(window):
+    window.destroy()
+    return 0
+
+def call_sbox(window):
+    window.destroy()
+    time.sleep(5)  # Pause for 5 seconds
+    sbox = create_window()
+    create_label(sbox, 'You need to take a break of 5 minutes!')
+    button_ok = Button(sbox, text='O.K', command=lambda: close_window(sbox))
+    button_ok.pack()
+
 while True:
-    local_time = 3
-    local_time = local_time
-    time.sleep(local_time)
-    while True:
-        mbox = Tk()
-        mbox.title("Break Time")
-        width_win = 800
-        hidth_win = 300
-        screen_wi = mbox.winfo_screenwidth()
-        screen_hi = mbox.winfo_screenheight()
-        x_cordinet = (screen_wi/2) - (width_win/2)
-        y_cordinet = (screen_hi/2) - (hidth_win/2)
-        mbox.geometry("%dx%d+%d+%d" % (width_win, hidth_win, x_cordinet, y_cordinet))
-        def close_mbox_re():
-            mbox.destroy()
-            time.sleep(2)
-            def close_smbox():
-                smbox.destroy()
-            smbox = Tk()
-            smbox.title("Break Time")
-            width_win = 800
-            hidth_win = 300
-            screen_wi = smbox.winfo_screenwidth()
-            screen_hi = smbox.winfo_screenheight()
-            x_cordinet = (screen_wi/2) - (width_win/2)
-            y_cordinet = (screen_hi/2) - (hidth_win/2)
-            smbox.geometry("%dx%d+%d+%d" % (width_win, hidth_win, x_cordinet, y_cordinet))
-            canwiget = Canvas(smbox)
-            canwiget.pack()
-            thelabel = Label(smbox , text = 'You need to take a break of 5 minutes!' , font = 'verdana 25 bold', bd = 6, fg = 'red')
-            canwiget.create_window(200, 100, window=thelabel)
-        def close_mbox():
-            mbox.destroy()
-        canwiget = Canvas(mbox)
-        canwiget.pack()
-        thelabel = Label(mbox , text = 'You need to take a break of 5 minutes' , font = 'verdana 25 bold', bd = 6, fg = 'red')
-        canwiget.create_window(200, 100, window=thelabel)
-        btoon_mor5 = Button(mbox, text = ' more 5 minutes', command = close_mbox_re)
-        btoon_ok = Button(mbox, text = 'O.K', command = close_mbox)
-        canwiget.create_window(350, 250, window=btoon_mor5)
-        canwiget.create_window(0, 250, window=btoon_ok)
-        mbox.mainloop()
-        break
+    mbox = create_window()
+    create_label(mbox, 'You need to take a break of 5 minutes')
+    button_mor5 = Button(mbox, text='more 5 minutes', command=lambda: call_sbox(mbox))
+    button_mor5.pack(side=LEFT)
+    button_ok = Button(mbox, text='O.K', command=lambda: close_window(mbox))
+    button_ok.pack(side=RIGHT)
+    mbox.mainloop()
