@@ -7,7 +7,7 @@ The Break Time Reminder is a simple Python application built using Tkinter that 
 ## Features
 
 - Displays a reminder message to take a 5-minute break.
-- Allows the user to extend the break time by an additional 5 minutes.
+- Allows the user to extend the work time by an additional 5 minutes.
 - Automatically hides the reminder after acknowledgment.
 - Provides a clean and simple user interface.
 
@@ -34,16 +34,14 @@ To use the script, follow these steps:
 ## Usage
 
 1. **Start the Script:**
-- Run the script either manually or configure it to run automatically on system startup (instructions provided in the script).
+- Run the script either manually or configure it to run automatically on system startup (look at set up automatically ideas file).
 
 2. **Work Intervals:**
-- The script measures work intervals (default: 3 seconds) and prompts the user to take a short break after every two intervals.
+- The script measures work time and prompts the user to take a short break after every 2 hour.
 
 3. **Break Reminders:**
-- When it's time for a break, a popup window appears with options to extend the break or confirm readiness to resume work.
+- When it's time for a break, a popup window appears with options to extend the work time by 5 minutes (& reappears after 5 minutes) or confirm to take a break now.
 
-4. **Extended Breaks:**
-- After a predefined number of short breaks, the script suggests an extended break (default: 2 hours).
 
 ## Contributing
 
@@ -53,9 +51,6 @@ Contributions to this project are welcome! If you have suggestions for improveme
 
 This project is licensed under the [MIT License](LICENSE), which means you are free to use, modify, and distribute the code for both commercial and non-commercial purposes. See the [LICENSE](LICENSE) file for more details.
 
-## Acknowledgements
-
-Special thanks to contributors and open-source libraries that made this project possible.
 
 Happy coding and remember to take breaks!
  
