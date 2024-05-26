@@ -1,69 +1,81 @@
-"""***####by defolt whiuot user was tuch, up withe th os
-******###after a 2 break of 5m you can take a 15 m break
-****** def install
-####back to work*****"""
-#!/usr/bin/python3
-import os
-if os.name == 'nt':
-    os.system('cls')
-#    src = 'reminder.exe'
-#    dest = 'C:/ProgramData/Microsoft/Windows/Start Menu/Programs/StartUp/reminder.exe'
-    os.rename('reminder.exe', 'C:/ProgramData/Microsoft/Windows/Start Menu/Programs/StartUp/reminder.exe')
-else:
-    loction = os.getcwd()
-    os.system('clear')
-    os.system(f"sed  -i '1i {loction}/reminder.py &'  ~/.bashrc")
-#    os.system(f"sed -i '19,20d' {loction}/reminder.py")
-    try:
-        import tkinter
-    except ImportError as e:
-        print('We install a library so the script can run easily ....\nWe need from you to input your password that we can install the missing without problem')
-        def install_function():
-            os.system("sudo bash -c 'sudo apt-get update && sudo apt install python3-tk -y >/dev/null 2>&1 & disown'")
-        install_function()
 from tkinter import *
-import time
-while True:
-    local_time = 3
-    local_time = local_time
-    time.sleep(local_time)
-    while True:
-        mbox = Tk()
-        mbox.title("Break Time")
-        width_win = 800
-        hidth_win = 300
-        screen_wi = mbox.winfo_screenwidth()
-        screen_hi = mbox.winfo_screenheight()
-        x_cordinet = (screen_wi/2) - (width_win/2)
-        y_cordinet = (screen_hi/2) - (hidth_win/2)
-        mbox.geometry("%dx%d+%d+%d" % (width_win, hidth_win, x_cordinet, y_cordinet))
-        def close_mbox_re():
-            mbox.destroy()
-            time.sleep(2)
-            def close_smbox():
-                smbox.destroy()
-            smbox = Tk()
-            smbox.title("Break Time")
-            width_win = 800
-            hidth_win = 300
-            screen_wi = smbox.winfo_screenwidth()
-            screen_hi = smbox.winfo_screenheight()
-            x_cordinet = (screen_wi/2) - (width_win/2)
-            y_cordinet = (screen_hi/2) - (hidth_win/2)
-            smbox.geometry("%dx%d+%d+%d" % (width_win, hidth_win, x_cordinet, y_cordinet))
-            canwiget = Canvas(smbox)
-            canwiget.pack()
-            thelabel = Label(smbox , text = 'You need to take a break of 5 minutes!' , font = 'verdana 25 bold', bd = 6, fg = 'red')
-            canwiget.create_window(200, 100, window=thelabel)
-        def close_mbox():
-            mbox.destroy()
-        canwiget = Canvas(mbox)
-        canwiget.pack()
-        thelabel = Label(mbox , text = 'You need to take a break of 5 minutes' , font = 'verdana 25 bold', bd = 6, fg = 'red')
-        canwiget.create_window(200, 100, window=thelabel)
-        btoon_mor5 = Button(mbox, text = ' more 5 minutes', command = close_mbox_re)
-        btoon_ok = Button(mbox, text = 'O.K', command = close_mbox)
-        canwiget.create_window(350, 250, window=btoon_mor5)
-        canwiget.create_window(0, 250, window=btoon_ok)
-        mbox.mainloop()
-        break
+#I use after func that calc the time in ms...
+#on my system the app use around 90 mb
+#I dont use the destroy func because it kill the app 
+class BreakTimeApp:
+    def __init__(self):
+        # Create the main window and set it up
+        self.root = self.create_window()
+        self.create_root_window()
+        # Create a secondary window for additional options
+        self.sbox = self.create_window()
+        # Hide the secondary window initially
+        self.sbox.withdraw()
+        # Schedule the 'run' method to be executed after 2 hour
+        self.root.after(7_200_000, self.run) 
+
+    def create_window(self):
+        # Create a new window
+        window = Tk()
+        # Hide window borders and title bar
+        window.overrideredirect(1)
+        # Get screen dimensions
+        screen_width = window.winfo_screenwidth()
+        screen_height = window.winfo_screenheight()
+        # Calculate coordinates to center the window
+        x_coordinate = (screen_width - 800) // 2
+        y_coordinate = (screen_height - 300) // 2
+        # Set window size and position
+        window.geometry(f"800x300+{x_coordinate}+{y_coordinate}")
+        return window
+
+    def create_root_window(self):
+        # Create label widget with the message
+        self.label = Label(self.root, text='You need to take a break of 5 minutes', font='verdana 25 bold', bd=6, fg='red')
+        self.label.place(relx=0.5, rely=0.5, anchor=CENTER)
+
+        # Create button widget to request additional 5 minutes
+        self.button_mor5 = Button(self.root, text='more 5 minutes', command=self.call_sbox)
+        self.button_mor5.place(relx=0.15, rely=0.8, anchor=S)
+
+        # Create button widget to acknowledge break
+        self.button_ok_root = Button(self.root, text='O.K', command=self.close_main_window)
+        self.button_ok_root.place(relx=0.9, rely=0.8, anchor=S)
+
+    def call_sbox(self):
+        # Hide the main window
+        self.root.withdraw()
+        # Schedule the 'show_sbox' method to be executed after 5 minutes
+        self.root.after(300_000, self.show_sbox)
+
+    def show_sbox(self):
+        # Create label widget with break message in the secondary window
+        self.sbox_label = Label(self.sbox, text='You need to take a break of 5 minutes!', font='verdana 25 bold', bd=6, fg='red')
+        self.sbox_label.place(relx=0.5, rely=0.4, anchor=CENTER)
+        # Create button widget to acknowledge break in the secondary window
+        self.button_ok_sbox = Button(self.sbox, text='O.K', command=self.close_sbox)
+        self.button_ok_sbox.place(relx=0.5, rely=0.8, anchor=CENTER)
+        # Make the secondary window visible
+        self.sbox.deiconify()
+
+    def close_sbox(self):
+        # Hide the secondary window
+        self.sbox.withdraw()
+        # Schedule the main window to be displayed after 5 minutes
+        self.root.after(300_000, self.root.deiconify) 
+
+    def close_main_window(self):
+        # Hide the main window
+        self.root.withdraw()
+        # Schedule the main window to be displayed after 2 hour and 5 minutes
+        self.root.after(7_500_000, self.root.deiconify)
+
+    def run(self):
+        # Start the Tkinter event loop
+        self.root.mainloop()
+
+if __name__ == "__main__":
+    # Create an instance of the BreakTimeApp class
+    app = BreakTimeApp()
+    # Start the application
+    app.run()
