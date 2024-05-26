@@ -1,12 +1,16 @@
-#Overview
+# Break Time Reminder
+
+## Overview
 
 The Break Time Reminder is a simple Python application built using Tkinter that reminds users to take short breaks at regular intervals during work hours. It helps prevent eye strain and promotes healthy work habits.
-#Features
 
---    Displays a reminder message to take a 5-minute break.
---   Allows the user to extend the break time by an additional 5 minutes.
---   Automatically hides the reminder after acknowledgment.
---   Provides a clean and simple user interface.
+## Features
+
+- Displays a reminder message to take a 5-minute break.
+- Allows the user to extend the break time by an additional 5 minutes.
+- Automatically hides the reminder after acknowledgment.
+- Provides a clean and simple user interface.
+
 ## Installation
 
 To use the script, follow these steps:
